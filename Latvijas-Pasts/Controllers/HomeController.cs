@@ -1,32 +1,97 @@
+using CV.Core.Services;
 using Latvijas_Pasts.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace Latvijas_Pasts.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ICvService _cvService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ICvService cvService)
         {
-            _logger = logger;
+            _cvService = cvService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var cvs = _cvService.GetCvs();
+            return View(cvs);
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        public IActionResult Create()
         {
-            return View();
+            var cv = new Cv
+            { 
+                Address = new Address(),
+                EducationList = new List<Education> { new Education() },
+                ExperienceList = new List<Experience> { new Experience() }
+            };
+
+            return View(cv);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+        public IActionResult Create(Cv cv)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (ModelState.IsValid)
+            {
+                _cvService.AddCv(cv);
+                return RedirectToAction("Index");
+            }
+
+            return View(cv);
         }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var cv = _cvService.GetCvById(id);
+            if (cv == null)
+            {
+                return NotFound();
+            }
+            return View(cv);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Cv cv)
+        {
+            if (ModelState.IsValid)
+            {
+                _cvService.UpdateCv(cv);
+                return RedirectToAction("Index");
+            }
+            return View(cv);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var cv = _cvService.GetCvById(id);
+            if (cv == null)
+            {
+                return NotFound();
+            }
+            return View(cv);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _cvService.DeleteCv(id);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Details(int id)
+        {
+            var cv = _cvService.GetCvById(id);
+            if (cv == null)
+            {
+                return NotFound();
+            }
+            return View(cv);
+        }
+
     }
 }
