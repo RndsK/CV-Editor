@@ -23,10 +23,10 @@ namespace Latvijas_Pasts.Controllers
         public IActionResult Create()
         {
             var cv = new Cv
-            { 
+            {
                 Address = new Address(),
-                EducationList = new List<Education> { new Education() },
-                ExperienceList = new List<Experience> { new Experience() }
+                EducationList = new List<Education> { new Education() },  
+                ExperienceList = new List<Experience> { new Experience() } 
             };
 
             return View(cv);
@@ -35,13 +35,10 @@ namespace Latvijas_Pasts.Controllers
         [HttpPost]
         public IActionResult Create(Cv cv)
         {
-            if (ModelState.IsValid)
-            {
-                _cvService.AddCv(cv);
-                return RedirectToAction("Index");
-            }
+            if (!ModelState.IsValid) return View(cv);
+            _cvService.AddCv(cv);
+            return RedirectToAction("Index");
 
-            return View(cv);
         }
         [HttpGet]
         public IActionResult Edit(int id)

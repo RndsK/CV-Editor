@@ -91,6 +91,12 @@ namespace CV.Data.Migrations
             modelBuilder.Entity("Latvijas_Pasts.Models.Education", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CvId")
                         .HasColumnType("int");
 
                     b.Property<string>("Degree")
@@ -119,17 +125,25 @@ namespace CV.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CvId");
+
                     b.ToTable("Educations");
                 });
 
             modelBuilder.Entity("Latvijas_Pasts.Models.Experience", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CvId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -144,6 +158,8 @@ namespace CV.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CvId");
 
                     b.ToTable("Experiences");
                 });
@@ -163,7 +179,7 @@ namespace CV.Data.Migrations
                 {
                     b.HasOne("Latvijas_Pasts.Models.Cv", null)
                         .WithMany("EducationList")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("CvId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -172,7 +188,7 @@ namespace CV.Data.Migrations
                 {
                     b.HasOne("Latvijas_Pasts.Models.Cv", null)
                         .WithMany("ExperienceList")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("CvId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

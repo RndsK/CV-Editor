@@ -54,7 +54,9 @@ namespace CV.Data.Migrations
                 name: "Educations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CvId = table.Column<int>(type: "int", nullable: false),
                     InstitutionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Faculty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StudyField = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -66,8 +68,8 @@ namespace CV.Data.Migrations
                 {
                     table.PrimaryKey("PK_Educations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Educations_Cv_Id",
-                        column: x => x.Id,
+                        name: "FK_Educations_Cv_CvId",
+                        column: x => x.CvId,
                         principalTable: "Cv",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -77,7 +79,9 @@ namespace CV.Data.Migrations
                 name: "Experiences",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CvId = table.Column<int>(type: "int", nullable: false),
                     CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Position = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Duration = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -87,8 +91,8 @@ namespace CV.Data.Migrations
                 {
                     table.PrimaryKey("PK_Experiences", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Experiences_Cv_Id",
-                        column: x => x.Id,
+                        name: "FK_Experiences_Cv_CvId",
+                        column: x => x.CvId,
                         principalTable: "Cv",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -98,6 +102,16 @@ namespace CV.Data.Migrations
                 name: "IX_Cv_AddressId",
                 table: "Cv",
                 column: "AddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Educations_CvId",
+                table: "Educations",
+                column: "CvId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Experiences_CvId",
+                table: "Experiences",
+                column: "CvId");
         }
 
         /// <inheritdoc />

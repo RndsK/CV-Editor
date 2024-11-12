@@ -32,8 +32,7 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-			
-            <!-- Address Section -->
+
             <h4>Address</h4>
             <div class="form-group">
                 <label asp-for="Address.Country" class="control-label"></label>
@@ -61,69 +60,84 @@
                 <span asp-validation-for="Address.HouseNumber" class="text-danger"></span>
             </div>
 
-            <!-- Education Section -->
             <h4>Education</h4>
-            @for (int i = 0; i < Model.EducationList.Count; i++)
-            {
-                <div class="form-group">
-                    <label asp-for="EducationList[i].InstitutionName" class="control-label"></label>
-                    <input asp-for="EducationList[i].InstitutionName" class="form-control" />
-                    <span asp-validation-for="EducationList[i].InstitutionName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="EducationList[i].Faculty" class="control-label"></label>
-                    <input asp-for="EducationList[i].Faculty" class="form-control" />
-                    <span asp-validation-for="EducationList[i].Faculty" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="EducationList[i].StudyField" class="control-label"></label>
-                    <input asp-for="EducationList[i].StudyField" class="form-control" />
-                    <span asp-validation-for="EducationList[i].StudyField" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="EducationList[i].Degree" class="control-label"></label>
-                    <input asp-for="EducationList[i].Degree" class="form-control" />
-                    <span asp-validation-for="EducationList[i].Degree" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="EducationList[i].Status" class="control-label"></label>
-                    <input asp-for="EducationList[i].Status" class="form-control" />
-                    <span asp-validation-for="EducationList[i].Status" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="EducationList[i].Duration" class="control-label"></label>
-                    <input asp-for="EducationList[i].Duration" class="form-control" />
-                    <span asp-validation-for="EducationList[i].Duration" class="text-danger"></span>
-                </div> 
-                <hr />
-            }
+            <div id="education-container">
+                @for (int i = 0; i < Model.EducationList.Count; i++)
+                {
+                    <div class="education-item">
+                        <input type="hidden" asp-for="EducationList[i].Id" />
 
-            <!-- Experience Section -->
+                        <div class="form-group">
+                            <label asp-for="EducationList[i].InstitutionName" class="control-label"></label>
+                            <input asp-for="EducationList[i].InstitutionName" class="form-control" />
+                            <span asp-validation-for="EducationList[i].InstitutionName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EducationList[i].Faculty" class="control-label"></label>
+                            <input asp-for="EducationList[i].Faculty" class="form-control" />
+                            <span asp-validation-for="EducationList[i].Faculty" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EducationList[i].StudyField" class="control-label"></label>
+                            <input asp-for="EducationList[i].StudyField" class="form-control" />
+                            <span asp-validation-for="EducationList[i].StudyField" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EducationList[i].Degree" class="control-label"></label>
+                            <input asp-for="EducationList[i].Degree" class="form-control" />
+                            <span asp-validation-for="EducationList[i].Degree" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EducationList[i].Status" class="control-label"></label>
+                            <input asp-for="EducationList[i].Status" class="form-control" />
+                            <span asp-validation-for="EducationList[i].Status" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EducationList[i].Duration" class="control-label"></label>
+                            <input asp-for="EducationList[i].Duration" class="form-control" />
+                            <span asp-validation-for="EducationList[i].Duration" class="text-danger"></span>
+                        </div>
+                        <button type="button" class="btn btn-danger remove-education">Remove Education</button>
+                        <hr />
+                    </div>
+                }
+            </div>
+            <button type="button" id="add-education" class="btn btn-secondary">Add New Education</button>
+
             <h4>Experience</h4>
-            @for (int i = 0; i < Model.ExperienceList.Count; i++)
-            {
-                <div class="form-group">
-                    <label asp-for="ExperienceList[i].CompanyName" class="control-label"></label>
-                    <input asp-for="ExperienceList[i].CompanyName" class="form-control" />
-                    <span asp-validation-for="ExperienceList[i].CompanyName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ExperienceList[i].Position" class="control-label"></label>
-                    <input asp-for="ExperienceList[i].Position" class="form-control" />
-                    <span asp-validation-for="ExperienceList[i].Position" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ExperienceList[i].Duration" class="control-label"></label>
-                    <input asp-for="ExperienceList[i].Duration" class="form-control" />
-                    <span asp-validation-for="ExperienceList[i].Duration" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ExperienceList[i].Description" class="control-label"></label>
-                    <input asp-for="ExperienceList[i].Description" class="form-control" />
-                    <span asp-validation-for="ExperienceList[i].Description" class="text-danger"></span>
-                </div>
-                <hr />
-            }
+            <div id="experience-container">
+                @for (int i = 0; i < Model.ExperienceList.Count; i++)
+                {
+                    <div class="experience-item">
+                        <input type="hidden" asp-for="ExperienceList[i].Id" />
+
+                        <div class="form-group">
+                            <label asp-for="ExperienceList[i].CompanyName" class="control-label"></label>
+                            <input asp-for="ExperienceList[i].CompanyName" class="form-control" />
+                            <span asp-validation-for="ExperienceList[i].CompanyName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ExperienceList[i].Position" class="control-label"></label>
+                            <input asp-for="ExperienceList[i].Position" class="form-control" />
+                            <span asp-validation-for="ExperienceList[i].Position" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ExperienceList[i].Duration" class="control-label"></label>
+                            <input asp-for="ExperienceList[i].Duration" class="form-control" />
+                            <span asp-validation-for="ExperienceList[i].Duration" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ExperienceList[i].Description" class="control-label"></label>
+                            <input asp-for="ExperienceList[i].Description" class="form-control" />
+                            <span asp-validation-for="ExperienceList[i].Description" class="text-danger"></span>
+                        </div>
+                        <button type="button" class="btn btn-danger remove-experience">Remove Experience</button>
+                        <hr />
+                    </div>
+                }
+            </div>
+            <button type="button" id="add-experience" class="btn btn-secondary">Add New Experience</button>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -136,5 +150,48 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	<script>
+        $(document).ready(function () {
+            $("#add-education").click(function () {
+                var index = $("#education-container .education-item").length;
+                var newEducation = $("#education-container .education-item:first").clone();
+                newEducation.find("input").each(function () {
+                    var name = $(this).attr("name");
+                    if (name) {
+                        var newName = name.replace(/\[\d+\]/, "[" + index + "]");
+                        $(this).attr("name", newName);
+                        $(this).attr("id", newName);
+                        $(this).val("");
+                    }
+                });
+                newEducation.find("input[name$='.Id']").val(0);
+                $("#education-container").append(newEducation);
+            });
+
+            $("#education-container").on("click", ".remove-education", function () {
+                $(this).closest(".education-item").remove();
+            });
+
+            $("#add-experience").click(function () {
+                var index = $("#experience-container .experience-item").length;
+                var newExperience = $("#experience-container .experience-item:first").clone();
+                newExperience.find("input").each(function () {
+                    var name = $(this).attr("name");
+                    if (name) {
+                        var newName = name.replace(/\[\d+\]/, "[" + index + "]");
+                        $(this).attr("name", newName);
+                        $(this).attr("id", newName);
+                        $(this).val("")
+                    }
+                });
+                newExperience.find("input[name$='.Id']").val(0);
+                $("#experience-container").append(newExperience);
+            });
+
+            $("#experience-container").on("click", ".remove-experience", function () {
+                $(this).closest(".experience-item").remove();
+            });
+        });
+    </script>
 }

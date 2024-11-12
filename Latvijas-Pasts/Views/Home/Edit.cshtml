@@ -28,10 +28,105 @@
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+	            <label asp-for="Email" class="control-label"></label>
+	            <input asp-for="Email" class="form-control" />
+	            <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+			
+            <h4>Address</h4>
+            <div class="form-group">
+	            <label asp-for="Address.Country" class="control-label"></label>
+	            <input asp-for="Address.Country" class="form-control" />
+	            <span asp-validation-for="Address.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+	            <label asp-for="Address.City" class="control-label"></label>
+	            <input asp-for="Address.City" class="form-control" />
+	            <span asp-validation-for="Address.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+	            <label asp-for="Address.Street" class="control-label"></label>
+	            <input asp-for="Address.Street" class="form-control" />
+	            <span asp-validation-for="Address.Street" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+	            <label asp-for="Address.PostalCode" class="control-label"></label>
+	            <input asp-for="Address.PostalCode" class="form-control" />
+	            <span asp-validation-for="Address.PostalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+	            <label asp-for="Address.HouseNumber" class="control-label"></label>
+	            <input asp-for="Address.HouseNumber" class="form-control" />
+	            <span asp-validation-for="Address.HouseNumber" class="text-danger"></span>
+            </div>
+
+
+            <h4>Education</h4>
+            @for (int i = 0; i < Model.EducationList.Count; i++)
+            {
+                <input type="hidden" asp-for="EducationList[i].Id" />
+
+                <div class="form-group">
+                    <label asp-for="EducationList[i].InstitutionName" class="control-label"></label>
+                    <input asp-for="EducationList[i].InstitutionName" class="form-control" />
+                    <span asp-validation-for="EducationList[i].InstitutionName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EducationList[i].Faculty" class="control-label"></label>
+                    <input asp-for="EducationList[i].Faculty" class="form-control" />
+                    <span asp-validation-for="EducationList[i].Faculty" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EducationList[i].StudyField" class="control-label"></label>
+                    <input asp-for="EducationList[i].StudyField" class="form-control" />
+                    <span asp-validation-for="EducationList[i].StudyField" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EducationList[i].Degree" class="control-label"></label>
+                    <input asp-for="EducationList[i].Degree" class="form-control" />
+                    <span asp-validation-for="EducationList[i].Degree" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EducationList[i].Status" class="control-label"></label>
+                    <input asp-for="EducationList[i].Status" class="form-control" />
+                    <span asp-validation-for="EducationList[i].Status" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EducationList[i].Duration" class="control-label"></label>
+                    <input asp-for="EducationList[i].Duration" class="form-control" />
+                    <span asp-validation-for="EducationList[i].Duration" class="text-danger"></span>
+                </div>
+	            <hr/>
+            }
+			
+            <h4>Experience</h4>
+            @for (int i = 0; i < Model.ExperienceList.Count; i++)
+            {
+	            <input type="hidden" asp-for="ExperienceList[i].Id" />
+                
+	            <div class="form-group">
+		            <label asp-for="ExperienceList[i].CompanyName" class="control-label"></label>
+		            <input asp-for="ExperienceList[i].CompanyName" class="form-control" />
+		            <span asp-validation-for="ExperienceList[i].CompanyName" class="text-danger"></span>
+	            </div>
+	            <div class="form-group">
+		            <label asp-for="ExperienceList[i].Position" class="control-label"></label>
+		            <input asp-for="ExperienceList[i].Position" class="form-control" />
+		            <span asp-validation-for="ExperienceList[i].Position" class="text-danger"></span>
+	            </div>
+	            <div class="form-group">
+		            <label asp-for="ExperienceList[i].Duration" class="control-label"></label>
+		            <input asp-for="ExperienceList[i].Duration" class="form-control" />
+		            <span asp-validation-for="ExperienceList[i].Duration" class="text-danger"></span>
+	            </div>
+	            <div class="form-group">
+		            <label asp-for="ExperienceList[i].Description" class="control-label"></label>
+		            <input asp-for="ExperienceList[i].Description" class="form-control" />
+		            <span asp-validation-for="ExperienceList[i].Description" class="text-danger"></span>
+	            </div>
+	            <hr />
+            }
+
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
