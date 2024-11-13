@@ -1,3 +1,8 @@
+using CV.Core.Services;
+using CV.Data;
+using CV.Services;
+using Microsoft.EntityFrameworkCore;
+
 namespace Latvijas_Pasts
 {
     public class Program
@@ -8,6 +13,11 @@ namespace Latvijas_Pasts
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<CvDbContext>(
+                options => options.UseSqlServer(builder.Configuration.GetConnectionString("latvijas-pasts")));
+
+            builder.Services.AddScoped<ICvService, CvService>();
 
             var app = builder.Build();
 
