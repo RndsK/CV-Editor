@@ -74,7 +74,7 @@ namespace Latvijas_Pasts.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteCv(int id)
         {
             _cvService.DeleteCv(id);
             return RedirectToAction("Index");

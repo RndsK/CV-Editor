@@ -1,30 +1,54 @@
-﻿@{
+﻿@using System.Linq
+@model IEnumerable<Latvijas_Pasts.Models.Cv>
+@{
     ViewData["Title"] = "Cvs";
 }
 
-<h2>List of CVs</h2>
-<table>
-	<thead>
-	<tr>
-		<th>Name</th>
-		<th>Phone</th>
-		<th>Email</th>
-		<th>Actions</th>
-	</tr>
-	</thead>
-	<tbody>
-	@foreach (var cv in Model)
-	{
+<h1 class="mb-4">List of CVs</h1>
+
+<div class="row mb-4">
+	<div class="col-md-12 text-end">
+		<a asp-action="Create" class="btn btn-primary">Add New CV</a>
+	</div>
+</div>
+
+<div class="table-responsive">
+	<table class="table table-striped table-hover">
+		<thead class="table-dark">
 		<tr>
-			<td>@cv.Name @cv.Surname</td>
-			<td>@cv.Phone</td>
-			<td>@cv.Email</td>
-			<td>
-				<a asp-action="Details" asp-route-id="@cv.Id">View</a> |
-				<a asp-action="Edit" asp-route-id="@cv.Id">Edit</a> |
-				<a asp-action="Delete" asp-route-id="@cv.Id">Delete</a>
-			</td>
+			<th scope="col">#</th>
+			<th scope="col">Name</th>
+			<th scope="col">Phone</th>
+			<th scope="col">Email</th>
+			<th scope="col" class="text-center">Actions</th>
 		</tr>
-	}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+		@if (Model.Any())
+		{
+			int count = 1;
+			foreach (var cv in Model)
+			{
+				<tr>
+					<th scope="row">@count</th>
+					<td>@cv.Name @cv.Surname</td>
+					<td>@cv.Phone</td>
+					<td>@cv.Email</td>
+					<td class="text-center">
+						<a asp-action="Details" asp-route-id="@cv.Id" class="btn btn-info btn-sm me-2">View</a>
+						<a asp-action="Edit" asp-route-id="@cv.Id" class="btn btn-warning btn-sm me-2">Edit</a>
+						<a asp-action="Delete" asp-route-id="@cv.Id" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this CV?');">Delete</a>
+					</td>
+				</tr>
+				count++;
+			}
+		}
+		else
+		{
+			<tr>
+				<td colspan="5" class="text-center">No CVs available.</td>
+			</tr>
+		}
+		</tbody>
+	</table>
+</div>
