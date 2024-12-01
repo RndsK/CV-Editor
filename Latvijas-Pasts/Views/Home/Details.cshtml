@@ -1,0 +1,122 @@
+﻿@model Latvijas_Pasts.Models.Cv
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="mb-4">CV Details</h1>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Personal Information</h5>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">@Model.Name @Model.Surname</dd>
+
+            <dt class="col-sm-3">Phone</dt>
+            <dd class="col-sm-9">@Model.Phone</dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.Email</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Address Information</h5>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Country</dt>
+            <dd class="col-sm-9">@Model.Address.Country</dd>
+
+            <dt class="col-sm-3">City</dt>
+            <dd class="col-sm-9">@Model.Address.City</dd>
+
+            <dt class="col-sm-3">Street</dt>
+            <dd class="col-sm-9">@Model.Address.Street</dd>
+
+            <dt class="col-sm-3">Postal Code</dt>
+            <dd class="col-sm-9">@Model.Address.PostalCode</dd>
+
+            <dt class="col-sm-3">House Number</dt>
+            <dd class="col-sm-9">@Model.Address.HouseNumber</dd>
+        </dl>
+    </div>
+</div>
+
+@if (Model.EducationList != null && Model.EducationList.Any())
+{
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Education</h5>
+        </div>
+        <div class="card-body">
+            @foreach (var education in Model.EducationList)
+            {
+                <div class="border-bottom mb-3 pb-3">
+                    <dl class="row">
+                        <dt class="col-sm-3">Institution Name</dt>
+                        <dd class="col-sm-9">@education.InstitutionName</dd>
+
+                        <dt class="col-sm-3">Faculty</dt>
+                        <dd class="col-sm-9">@education.Faculty</dd>
+
+                        <dt class="col-sm-3">Study Field</dt>
+                        <dd class="col-sm-9">@education.StudyField</dd>
+
+                        <dt class="col-sm-3">Degree</dt>
+                        <dd class="col-sm-9">@education.Degree</dd>
+
+                        <dt class="col-sm-3">Status</dt>
+                        <dd class="col-sm-9">@education.Status</dd>
+
+                        <dt class="col-sm-3">Duration</dt>
+                        <dd class="col-sm-9">@education.Duration</dd>
+                    </dl>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+@if (Model.ExperienceList != null && Model.ExperienceList.Any())
+{
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Experience</h5>
+        </div>
+        <div class="card-body">
+            @foreach (var experience in Model.ExperienceList)
+            {
+                <div class="border-bottom mb-3 pb-3">
+                    <dl class="row">
+                        <dt class="col-sm-3">Company Name</dt>
+                        <dd class="col-sm-9">@experience.CompanyName</dd>
+
+                        <dt class="col-sm-3">Position</dt>
+                        <dd class="col-sm-9">@experience.Position</dd>
+
+                        <dt class="col-sm-3">Duration</dt>
+                        <dd class="col-sm-9">@experience.Duration</dd>
+
+                        <dt class="col-sm-3">Description</dt>
+                        <dd class="col-sm-9">@experience.Description</dd>
+                    </dl>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<div class="mt-4">
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Edit CV</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
